@@ -2,28 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Author: Alex Huang
+
 public class Obstacle : MonoBehaviour
 {
     GameObject ball;
-    Movement ballMovement;
+    Main ballMovement;
     CircleCollider2D ballCollider;
     Rigidbody2D obstacle;
     BoxCollider2D obstacleCollider;
     float speedMultiplier;
     bool hasStarted;
     bool hasEnded;
+    bool gameOver;
     bool slowDown;
 
     void Start()
     {
         ball = GameObject.Find("Ball");
-        ballMovement = ball.GetComponent<Movement>();
+        ballMovement = ball.GetComponent<Main>();
         ballCollider = ball.GetComponent<CircleCollider2D>();
         obstacle = GetComponent<Rigidbody2D>();
         obstacleCollider = GetComponent<BoxCollider2D>();
         speedMultiplier = 1f;
         hasStarted = false;
         hasEnded = false;
+        gameOver = false;
     }
 
     void Update()
@@ -40,6 +44,11 @@ public class Obstacle : MonoBehaviour
         // CHECKS IF THE GAME IS OVER
         if (hasEnded)
         {
+            if (!gameOver)
+            {
+                GameObject.Find("GameOver").GetComponent<GameOver>().end();
+                gameOver = true;
+            }
             return;
         }
         // UPDATES speedMultiplier
@@ -63,7 +72,7 @@ public class Obstacle : MonoBehaviour
             // UPDATES hasEnded IN THE MOVEMENT CLASS OF THE BALL OBJECT
             ballMovement.setHasEnded();
             // REMOVES BALL FROM THE SCREEN
-            ball.transform.position = new Vector3(0f, 0f, 0f);
+            ballMovement.removeBall();
         }
     }
 }

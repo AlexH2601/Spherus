@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Author: Alex Huang
+
 public class Score : MonoBehaviour
 {
     GameObject ball;
-    Movement ballMovement;
-    int score;
+    Main ballMovement;
     int scoreThreshold;
     float speedMultiplier;
     bool thresholdReached;
@@ -14,15 +15,15 @@ public class Score : MonoBehaviour
     void Start()
     {
         ball = GameObject.Find("Ball");
-        ballMovement = ball.GetComponent<Movement>();
-        score = 0;
-        scoreThreshold = 10;
+        ballMovement = ball.GetComponent<Main>();
+        scoreThreshold = 10; // Increments at which game speed increases
         speedMultiplier = 1f;
-        thresholdReached = false;
+        thresholdReached = false; // Tracks whether the player has passsed the current obstacle
     }
 
     void Update()
     {
+        int score = ScoreDisplay.scoreValue;
         // CHECKS IF THE PLAYER'S SCORE IS A MULTIPLE OF 10 AND THAT THE CODE IS RAN ONLY ONCE
         if (score != 0 && (score % scoreThreshold == 0) && !thresholdReached)
         {
@@ -36,13 +37,13 @@ public class Score : MonoBehaviour
             thresholdReached = false;
         }
 
-        Debug.Log("Score: " + (score));
         Debug.Log("Speed Multiplier: " + speedMultiplier);
     }
 
     public void increaseScore(int increment)
     {
-        score += increment;
+        // INCREMENTS GLOBAL SCORE VARIABLE
+        ScoreDisplay.scoreValue += increment;
     }
 
     public float getSpeedMultiplier()

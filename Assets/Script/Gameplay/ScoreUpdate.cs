@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Author: Alex Huang
+
 public class ScoreUpdate : MonoBehaviour
 {
     GameObject ball;
@@ -16,7 +18,7 @@ public class ScoreUpdate : MonoBehaviour
         ballCollider = ball.GetComponent<CircleCollider2D>();
         score = ball.GetComponent<Score>();
         scoreThreshold = GetComponent<BoxCollider2D>();
-        scored = false;
+        scored = false; // Tracks whether the player has passsed the current obstacle
     }
 
     void Update()

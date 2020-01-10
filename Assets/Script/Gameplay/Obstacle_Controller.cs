@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Author: Alex Huang
+
 public class Obstacle_Controller : MonoBehaviour
 {
     void OnTriggerEnter2D(Collider2D col)

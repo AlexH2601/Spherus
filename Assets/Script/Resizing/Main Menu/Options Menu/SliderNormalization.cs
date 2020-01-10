@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Author: Alex Huang
+
 public class SliderNormalization : MonoBehaviour
 {
     RectTransform button;

@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// Author: David Nygren
+
 public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
-
     public GameObject pauseMenuUI;
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -40,12 +42,18 @@ public class PauseMenu : MonoBehaviour
     public void LoadMenu()
     {
         Time.timeScale = 1f;
+        GameObject.FindGameObjectWithTag("Audio").GetComponent<ContinuousAudio>().stop();
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void Restart()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Game");
     }
 
     public void QuitGame()
     {
         Application.Quit();
     }
-
 }
